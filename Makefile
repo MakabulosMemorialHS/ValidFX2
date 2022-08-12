@@ -16,9 +16,8 @@ clean :
 	rm valid-tickets.txt
 
 
-build : PrintData.java vSplit.java ValidFX.java RunEditor.java PrintTickets.java
+build : vSplit.java ValidFX.java RunEditor.java PrintTickets.java
 	javac -d ${OUTPUTDIR} vSplit.java
-	javac -d ${OUTPUTDIR} PrintData.java
 	javac -d ${OUTPUTDIR} PrintTickets.java
 	javac -d ${OUTPUTDIR} RunEditor.java
 	javac -d ${OUTPUTDIR} -cp ${CLASSPATH} --module-path ${PATH_TO_FX} --add-modules ${JFX_MODULES} ValidFX.java

@@ -64,6 +64,7 @@ public class ValidFX extends Application {
         // 2. From that location, we then move to the relative path of the resource file
         //    that we need.
         // Let's try this.
+        systemProperties();
         String cwd = System.getProperty("user.dir");   // This locates where the JVM was invoked.
         System.out.println("Invoked from " + cwd);
         String path_to_resource = cwd + "/src/main/resources/validfx.fxml";
@@ -204,8 +205,8 @@ public class ValidFX extends Application {
 
                 vSplit.verticalSplit(outputFileName, 
                                      validTicketFileName,
-                                     "%-38s         %-36s", 
-                                     72);
+                                     "%-33s          %-33s", 
+                                     79);
 
                 RunEditor.editThisFile(validTicketFileName);
             }

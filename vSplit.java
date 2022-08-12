@@ -30,7 +30,7 @@ public class vSplit {
     // args[0] <-- Path name of the text file to read.
     // args[1] <-- Path name of the output file to write.
     // args[2] <-- Format string. Indicates the format of the columns.
-    //             Suggested for ValidFX: "%-38s         %-36s" 
+    //             Suggested for ValidFX: "%-43s%-36s" 
     // args[3] <-- Number of lines per page. Suggested: 76.
         if (args.length != 3) {
             System.out.println("Usage: vSplit <input-file> <output-file> <format-string> <lines-per-page>\n\n");
@@ -48,7 +48,7 @@ public class vSplit {
         int DebugMode = 0;       // 1 -- ON, 0 -- Off.
         BufferedReader csvInputStream;
         PrintWriter    jsonOutputStream;
-        String FORMAT_STRING = lineFormat;    // Used to be: "%-38s         %-36s";
+        String FORMAT_STRING = lineFormat; 
 
         int linesPerPage = lpp;    // 
 

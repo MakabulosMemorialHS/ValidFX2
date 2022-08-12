@@ -271,9 +271,9 @@ public class PrintTickets {
         //
 
         int LPP = paramLPP;    // Number of lines per page. Looks like this because of an edit.
-        int ticketHeight = 18;
-        int numTicketsPerPage = LPP/ticketHeight;
-        int paddingBottom = LPP %  ticketHeight;
+        int ticketHeight = 16;
+        int numTicketsPerPage = 4;
+        int paddingBottom = 0;      // No padding
         int ticketCount = 0;
         String[] dataArray;
         String output_line;
@@ -304,7 +304,7 @@ public class PrintTickets {
                   
                     // Now print each line of the Valids Ticket
                     // Each line of the ticket, excluding margins, is 35 characters long.
-                    output_line = String.format("%-17s %17s", 
+                    output_line = String.format("%-16s %16s", 
                         (idnum_std < 0)   ? "" : dataArray[idnum_std].strip(), 
                         (section_std < 0) ? "" : dataArray[section_std].strip());
                     jsonOutputStream.println(output_line);
@@ -319,43 +319,43 @@ public class PrintTickets {
                         (gu_f_name_std < 0) ? "" : dataArray[gu_f_name_std].strip());
                     jsonOutputStream.println(output_line);
 
-                    output_line = String.format("%-17s %17s", 
+                    output_line = String.format("%-16s %16s", 
                         (brgy_std < 0)   ?   "" : dataArray[brgy_std].strip(), 
                         (status_std < 0) ? "" : dataArray[status_std].strip());
                     jsonOutputStream.println(output_line);
 
-
+                    jsonOutputStream.print("\n"); // Add an extra line
                     jsonOutputStream.println("     >> Payments Received <<");
-                    output_line = String.format("%-12s %12s %-10s", 
+                    output_line = String.format("%-11s %12s %-8s", 
                         (date1_std < 0) ? "" : dataArray[date1_std].strip(), 
                         (rem1_std < 0)  ?  "" : dataArray[amt1_std].strip(), 
                         (rem1_std < 0)  ?  "" : dataArray[rem1_std].strip());
                     jsonOutputStream.println(output_line);
 
-                    output_line = String.format("%-12s %12s %-10s", 
+                    output_line = String.format("%-11s %12s %-8s", 
                         (date2_std < 0) ? "" : dataArray[date2_std].strip(), 
                         (amt2_std < 0) ?  "" : dataArray[amt2_std].strip(), 
                         (rem2_std < 0) ?  "" : dataArray[rem2_std].strip());
                     jsonOutputStream.println(output_line);
 
-                    output_line = String.format("%-12s %12s %-10s", 
+                    output_line = String.format("%-11s %12s %-8s", 
                         (date3_std < 0) ? "" : dataArray[date3_std].strip(), 
                         (amt3_std < 0)  ? "" : dataArray[amt3_std].strip(), 
                         (rem3_std < 0)  ? "" : dataArray[rem3_std].strip());
                     jsonOutputStream.println(output_line);
                     jsonOutputStream.println("      >>>>--->>o0o<<---<<<<");
 
-                    output_line = String.format("%-8s %8s %-8s %8s", "MS", 
+                    output_line = String.format("%-7s %8s %-7s %8s", "MS", 
                         (ms_mak_std < 0) ? "" : dataArray[ms_mak_std], "USB", 
                         (af_std < 0)     ? "" : dataArray[af_std].strip());
                     jsonOutputStream.println(output_line);
 
-                    output_line = String.format("%-8s %8s %-8s %8s", "Online", 
+                    output_line = String.format("%-7s %8s %-7s %8s", "Online", 
                         (tpaper_std < 0) ? "" : dataArray[tpaper_std], "BS", 
                         (tapsa_std < 0)  ? "" : dataArray[tapsa_std].strip());
                     jsonOutputStream.println(output_line);
 
-                    output_line = String.format("%-8s %8s %-8s %8s", "INS", 
+                    output_line = String.format("%-7s %8s %-7s %8s", "INS", 
                         (ins_std < 0)  ? "" : dataArray[ins_std], "MISC", 
                         (lfee_std < 0) ? "" : dataArray[lfee_std].strip());
                     jsonOutputStream.println(output_line);
@@ -365,17 +365,17 @@ public class PrintTickets {
                     jsonOutputStream.println(output_line);
 
                     jsonOutputStream.println("");
-                    output_line = String.format("%-35s", 
+                    output_line = String.format("%-33s", 
                         (comment5_std < 0) ? "" : dataArray[comment5_std].strip());
                     jsonOutputStream.println(output_line);
-                    
-                    jsonOutputStream.println("\n\n"); // 
 
-                    ticketCount += 1;
-                    if (ticketCount >= numTicketsPerPage) {
-                        for (int i = 0; i < paddingBottom; ++i) {
-                            jsonOutputStream.print("\n");
-                        }
+                    ticketCount = ticketCount + 1;
+
+                    if (ticketCount < numTicketsPerPage) {
+                        jsonOutputStream.print("\n\n\n\n\n");
+                    }
+
+                    if (ticketCount == numTicketsPerPage) {
                         ticketCount = 0;
                     }
                 }
