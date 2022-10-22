@@ -357,7 +357,7 @@ public class PrintTickets {
 
                     output_line = String.format("%-7s %8s %-7s %8s", "INS", 
                         (ins_std < 0)  ? "" : dataArray[ins_std], "MISC", 
-                        (lfee_std < 0) ? "" : dataArray[lfee_std].strip());
+                        (miscf_std < 0) ? "" : dataArray[miscf_std].strip());
                     jsonOutputStream.println(output_line);
 
                     output_line = String.format("%-8s %8s", "RM", 
